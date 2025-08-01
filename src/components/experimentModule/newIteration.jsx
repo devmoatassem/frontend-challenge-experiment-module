@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { Textarea } from '../ui/textarea'
+import useExperimentActions from '../../hooks/useExperimentActions'
 
 const NewIteration = ({ expId }) => {
-  const [inputValue, setInputValue] = useState('')
+  const { experimentData, addNewIterationTitle } = useExperimentActions(expId)
   const [showPrompt, setShowPrompt] = useState(true)
   const inputRef = useRef(null)
 
@@ -10,7 +11,7 @@ const NewIteration = ({ expId }) => {
     if (e.target.value.length === 0) {
       setShowPrompt(true)
     }
-    setInputValue(e.target.value)
+    addNewIterationTitle(e.target.value)
   }
 
   const handleGenerate = () => {
@@ -19,6 +20,7 @@ const NewIteration = ({ expId }) => {
 
       if (inputRef.current) {
         inputRef.current.value = 'Iteration Module'
+        addNewIterationTitle(inputRef.current.value)
         inputRef.current.focus()
       }
     })
@@ -27,13 +29,15 @@ const NewIteration = ({ expId }) => {
   return (
 
     <div
-      className='mt-4'
+      className='mt-4 transition-all duration-300'
       onBlur={() => {
-        setShowPrompt(true)
+        if (experimentData?.newIterationTitle?.length === 0) {
+          setShowPrompt(true)
+        }
       }}
     >
 
-      {showPrompt && inputValue.length === 0
+      {showPrompt
         ? (
           <div
             className='min-h-24 overflow-hidden rounded bg-background text-lg px-5 py-4'
@@ -63,7 +67,8 @@ const NewIteration = ({ expId }) => {
             placeholder=''
             className='w-full px-4 py-2 border-none rounded-md min-h-24 bg-background focus-visible:ring-0 focus-visible:ring-offset-0 '
             style={{ zIndex: 1 }}
-           />)}
+           />
+          )}
     </div>
 
   )

@@ -4,19 +4,20 @@ import useExperimentActions from '../../hooks/useExperimentActions'
 import { FaLock, FaLockOpen } from 'react-icons/fa6'
 import IterationModule from '../iterationModule'
 import NewIteration from './newIteration'
+import ExperimentActions from './experimentActions'
 
 const ExperimentModule = ({ expId }) => {
   const { experimentData } = useExperimentActions(expId)
 
   return (
-    <Accordion collapsible className='bg-primary px-5 py-1 rounded-lg overflow-hidden'>
+    <Accordion collapsible className='bg-primary px-5 rounded-lg overflow-hidden'>
       <AccordionItem value={`experiment-${expId}`}>
-        <AccordionTrigger className='text-2xl text-secondary-foreground hover:text-secondary-foreground/80'>{experimentData?.title}
-          <div className='p-2 text-secondary-foreground'>
+        <AccordionTrigger className='text-2xl text-primary-foreground hover:text-primary-foreground/80'>{experimentData?.title}
+          <div className='p-2 text-primary-foreground'>
             {experimentData?.lock ? <FaLock /> : <FaLockOpen />}
           </div>
         </AccordionTrigger>
-        <AccordionContent className=''>
+        <AccordionContent className='p-0'>
           <div className='space-y-1'> {experimentData?.iterations.map((iteration) => (
             <IterationModule key={`${iteration.id} + ${expId}`} expId={expId} iterationId={iteration.id} />
           ))}
@@ -24,6 +25,7 @@ const ExperimentModule = ({ expId }) => {
               <IterationModule expId={expId} isNew iterationId={experimentData?.iterations.length + 1} />}
           </div>
           {experimentData?.addingNewIteration && <NewIteration expId={expId} />}
+          <ExperimentActions expId={expId} />
         </AccordionContent>
       </AccordionItem>
     </Accordion>
