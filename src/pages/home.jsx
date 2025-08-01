@@ -7,12 +7,24 @@ import { FaPlus } from 'react-icons/fa6'
 const Home = () => {
   const { experimentModules, addNewExperimentModule } = useExperimentModuleContext()
   return (
-    <div className='bg-background font-'>
-      <div className='max-w-lg mx-auto h-screen overflow-auto space-y-2.5 p-4'>
+    <div className='bg-background font-sans tracking-wide'>
+      <div
+        className='max-w-lg mx-auto h-screen overflow-auto space-y-2.5 p-4'
+      >
         {experimentModules.map((experiment) => (
-          <ExperimentModule key={experiment.id} expId={experiment.id} />
+          <ExperimentModule
+            key={experiment.id}
+            expId={experiment.id}
+          />
         ))}
-        <div className='flex justify-center mt-4'> <Button onClick={addNewExperimentModule} variant='outline'><FaPlus /> Add Experiment Module</Button> </div>
+        <div className='flex justify-center mt-4'>
+          <Button
+            onClick={addNewExperimentModule}
+            variant='outline'
+          >
+            <FaPlus /> Add Experiment Module
+          </Button>
+        </div>
 
       </div>
     </div>

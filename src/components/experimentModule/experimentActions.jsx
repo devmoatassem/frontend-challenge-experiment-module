@@ -1,6 +1,7 @@
 import React from 'react'
 import useExperimentActions from '../../hooks/useExperimentActions'
 import { Button } from '../ui/button'
+import { ActionContainer } from '../ui/actionContainer'
 import { FaPlus } from 'react-icons/fa6'
 
 const ExperimentActions = ({ expId }) => {
@@ -15,9 +16,9 @@ const ExperimentActions = ({ expId }) => {
 
   if (experimentData.lock) {
     return (
-      <div className='flex gap-2 items-center justify-end py-2'>
+      <ActionContainer>
         <Button onClick={lockAndUnlockModule}>Unlock</Button>
-      </div>
+      </ActionContainer>
     )
   }
 
@@ -34,7 +35,7 @@ const ExperimentActions = ({ expId }) => {
       (typeof newTitle === 'string' && newTitle.trim().length === 0)
 
     return (
-      <div className='flex gap-2 items-center justify-end py-2'>
+      <ActionContainer>
         <Button
           onClick={cancelAddingNewIteration}
           disabled={isCancelDisabled}
@@ -47,15 +48,16 @@ const ExperimentActions = ({ expId }) => {
         >
           Done
         </Button>
-      </div>
+      </ActionContainer>
     )
   }
+
   return (
-    <div className='flex gap-2 items-center justify-end py-2'>
+    <ActionContainer>
       <Button onClick={lockAndUnlockModule}>Lock</Button>
       <Button onClick={resetModule}>Reset</Button>
       <Button onClick={startAddingNewIteration}><FaPlus /> Add Iteration</Button>
-    </div>
+    </ActionContainer>
   )
 }
 

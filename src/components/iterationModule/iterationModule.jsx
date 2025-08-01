@@ -5,6 +5,7 @@ import { ITERATION_TYPES } from '../../lib/constants'
 import { Separator } from '../ui/separator'
 import IterationModuleType from './iterationModuleType'
 import { Button } from '../ui/button'
+import { ActionContainer } from '../ui/actionContainer'
 
 const IterationModule = ({ expId, iterationId, isNew = false }) => {
   const { iterationData, experimentData, removeIteration } = useIterationActions(expId, iterationId)
@@ -20,11 +21,19 @@ const IterationModule = ({ expId, iterationId, isNew = false }) => {
       onValueChange={setOpenValue}
     >
       <AccordionItem value={`iteration-${iterationId}-${expId}`}>
-        <AccordionTrigger className='justify-start text-base font-normal leading-2 grid grid-cols-6 items-center'>
+        <AccordionTrigger
+          className='justify-start text-base font-normal leading-2 grid grid-cols-6 items-center'
+        >
           <p className='text-muted'>{`EM-${iterationId}`}</p>
           <div className='col-span-6 col-start-2 flex items-center justify-between'>
             <p className='text-muted'>
-              {!isNew ? <span className='text-muted-foreground'>{iterationData?.title}</span> : <span className='text-muted'>Adding iteration...</span>}
+              {!isNew
+                ? (
+                  <span className='text-muted-foreground'>{iterationData?.title}</span>
+                  )
+                : (
+                  <span className='text-muted'>Adding iteration...</span>
+                  )}
             </p>
             {iterationData?.type && (
               <div className='text-muted flex items-center text-base leading-0'>
@@ -33,7 +42,6 @@ const IterationModule = ({ expId, iterationId, isNew = false }) => {
               </div>
             )}
           </div>
-
         </AccordionTrigger>
         {!isNew && (
           <AccordionContent className='p-0 mt-4 grid grid-cols-6'>
@@ -47,10 +55,10 @@ const IterationModule = ({ expId, iterationId, isNew = false }) => {
                 />
               ))}
               <Separator className='my-2 opacity-40' />
-              <div className='flex gap-2 items-center justify-end w-full'>
+              <ActionContainer className='py-0'>
                 <Button onClick={removeIteration}>Remove</Button>
                 <Button onClick={() => setOpenValue('')}>Done</Button>
-              </div>
+              </ActionContainer>
             </div>
           </AccordionContent>
         )}

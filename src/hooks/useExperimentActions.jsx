@@ -46,19 +46,26 @@ const useExperimentActions = (expId) => {
     setExperimentModules(prevModules =>
       prevModules.map(module => {
         if (module.id === expId) {
-          return { ...module, newIterationTitle: null, addingNewIteration: true }
+          return {
+            ...module,
+            newIterationTitle: null,
+            addingNewIteration: true
+          }
         }
         return module
       })
     )
   }
 
-  // function to cancel adding a new iteration
   const cancelAddingNewIteration = () => {
     setExperimentModules(prevModules =>
       prevModules.map(module => {
         if (module.id === expId) {
-          return { ...module, newIterationTitle: null, addingNewIteration: false }
+          return {
+            ...module,
+            newIterationTitle: null,
+            addingNewIteration: false
+          }
         }
         return module
       })
@@ -70,7 +77,12 @@ const useExperimentActions = (expId) => {
     setExperimentModules(prevModules =>
       prevModules.map(module => {
         if (module.id === expId) {
-          return { ...module, newIterationTitle: null, addingNewIteration: true, iterations: [] }
+          return {
+            ...module,
+            newIterationTitle: null,
+            addingNewIteration: true,
+            iterations: []
+          }
         }
         return module
       })
@@ -88,6 +100,7 @@ const useExperimentActions = (expId) => {
       })
     )
   }
+
   return {
     experimentData,
     saveNewIteration,

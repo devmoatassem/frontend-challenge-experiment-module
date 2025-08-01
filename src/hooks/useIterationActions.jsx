@@ -19,7 +19,6 @@ const useIterationActions = (expId, iterationId) => {
           if (iterationIndex !== -1) {
             const updatedIterations = module.iterations.map((iteration, idx) => {
               if (idx === iterationIndex) {
-                // If type is already set and same as new one, set to null
                 if (iteration.type === type) {
                   return { ...iteration, type: null }
                 }

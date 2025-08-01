@@ -61,14 +61,15 @@ const NewIteration = ({ expId }) => {
             one
           </div>
           )
-        : (<Textarea
+        : (
+          <Textarea
             ref={inputRef}
             type='text'
             onChange={handleInputChange}
             placeholder=''
             className='w-full px-4 py-2 border-none rounded-md min-h-24 bg-background'
             style={{ zIndex: 1 }}
-           />
+          />
           )}
     </div>
 

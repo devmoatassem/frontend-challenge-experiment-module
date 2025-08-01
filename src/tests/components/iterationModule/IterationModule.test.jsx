@@ -14,50 +14,63 @@ const renderWithContext = (component) => {
 }
 
 describe('IterationModule', () => {
-  it('renders iteration ID and title correctly', () => {
-    renderWithContext(<IterationModule expId={1} iterationId={1} />)
-    expect(screen.getByText('EM-1')).toBeInTheDocument()
-    expect(screen.getByText('Iteration 1')).toBeInTheDocument()
-  })
+  describe('Rendering', () => {
+    it('displays iteration ID and title', () => {
+      renderWithContext(<IterationModule expId={1} iterationId={1} />)
 
-  it('shows "Adding iteration..." when isNew is true', () => {
-    renderWithContext(<IterationModule expId={1} iterationId={2} isNew />)
-    expect(screen.getByText('Adding iteration...')).toBeInTheDocument()
-  })
+      expect(screen.getByText('EM-1')).toBeInTheDocument()
+      expect(screen.getByText('Iteration 1')).toBeInTheDocument()
+    })
 
-  it('renders all iteration types', () => {
-    renderWithContext(<IterationModule expId={1} iterationId={1} />)
-    fireEvent.click(screen.getByText('EM-1'))
+    it('shows placeholder for new iteration', () => {
+      renderWithContext(<IterationModule expId={1} iterationId={2} isNew />)
 
-    ITERATION_TYPES.forEach(type => {
-      expect(screen.getByRole('button', { name: type.label })).toBeInTheDocument()
+      expect(screen.getByText('Adding iteration...')).toBeInTheDocument()
     })
   })
-  // test to check iterations clickable when locked
-  it('check iterations clickable when locked', () => {
-    renderWithContext(<ExperimentModule expId={3} />)
-    const accordionTrigger = screen.getByText('Experiment Module 3')
-    fireEvent.click(accordionTrigger)
-    const iteration = screen.getByText('EM-1')
-    fireEvent.click(iteration)
-    ITERATION_TYPES.forEach(type => {
-      expect(screen.queryByText(type.label)).not.toBeInTheDocument()
+
+  describe('Iteration Types', () => {
+    it('displays all available iteration types', () => {
+      renderWithContext(<IterationModule expId={1} iterationId={1} />)
+
+      fireEvent.click(screen.getByText('EM-1'))
+
+      ITERATION_TYPES.forEach(type => {
+        expect(screen.getByRole('button', { name: type.label })).toBeInTheDocument()
+      })
     })
   })
-  it('handles remove iteration', () => {
-    renderWithContext(<IterationModule expId={1} iterationId={1} />)
-    fireEvent.click(screen.getByText('EM-1'))
-    fireEvent.click(screen.getByText('Remove'))
-    // Verify the iteration was removed from context
-    expect(screen.queryByText('Iteration 1')).not.toBeInTheDocument()
+
+  describe('Locked State', () => {
+    it('prevents interaction when experiment is locked', () => {
+      renderWithContext(<ExperimentModule expId={3} />)
+
+      fireEvent.click(screen.getByText('Experiment Module 3'))
+      fireEvent.click(screen.getByText('EM-1'))
+
+      ITERATION_TYPES.forEach(type => {
+        expect(screen.queryByText(type.label)).not.toBeInTheDocument()
+      })
+    })
   })
 
-  it('handles done button click', () => {
-    renderWithContext(<IterationModule expId={1} iterationId={1} />)
-    fireEvent.click(screen.getByText('EM-1'))
-    fireEvent.click(screen.getByText('Done'))
+  describe('Actions', () => {
+    it('removes iteration when remove button is clicked', () => {
+      renderWithContext(<IterationModule expId={1} iterationId={1} />)
 
-    // Verify the accordion is closed
-    expect(screen.queryByRole('button', { name: 'Remove' })).not.toBeInTheDocument()
+      fireEvent.click(screen.getByText('EM-1'))
+      fireEvent.click(screen.getByText('Remove'))
+
+      expect(screen.queryByText('Iteration 1')).not.toBeInTheDocument()
+    })
+
+    it('closes accordion when done button is clicked', () => {
+      renderWithContext(<IterationModule expId={1} iterationId={1} />)
+
+      fireEvent.click(screen.getByText('EM-1'))
+      fireEvent.click(screen.getByText('Done'))
+
+      expect(screen.queryByRole('button', { name: 'Remove' })).not.toBeInTheDocument()
+    })
   })
 })

@@ -11,69 +11,76 @@ const wrapper = ({ children }) => (
 )
 
 describe('useExperimentActions', () => {
-  it('returns experiment data correctly', () => {
-    const { result } = renderHook(() => useExperimentActions(1), { wrapper })
-    expect(result.current.experimentData).toEqual(MOCK_DATA[0])
+  describe('Data Retrieval', () => {
+    it('returns correct experiment data', () => {
+      const { result } = renderHook(() => useExperimentActions(1), { wrapper })
+
+      expect(result.current.experimentData).toEqual(MOCK_DATA[0])
+    })
   })
 
-  it('saves new iteration correctly', () => {
-    const { result } = renderHook(() => useExperimentActions(1), { wrapper })
+  describe('Iteration Management', () => {
+    it('adds new iteration with title', () => {
+      const { result } = renderHook(() => useExperimentActions(1), { wrapper })
 
-    act(() => {
-      result.current.addNewIterationTitle('New Iteration')
-      result.current.saveNewIteration()
+      act(() => {
+        result.current.addNewIterationTitle('New Iteration')
+        result.current.saveNewIteration()
+      })
+
+      expect(result.current.experimentData.iterations).toHaveLength(3)
+      expect(result.current.experimentData.iterations[2].title).toBe('New Iteration')
     })
 
-    expect(result.current.experimentData.iterations).toHaveLength(3)
-    expect(result.current.experimentData.iterations[2].title).toBe('New Iteration')
+    it('enables new iteration mode', () => {
+      const { result } = renderHook(() => useExperimentActions(1), { wrapper })
+
+      act(() => {
+        result.current.startAddingNewIteration()
+      })
+
+      expect(result.current.experimentData.addingNewIteration).toBe(true)
+    })
+
+    it('cancels new iteration mode', () => {
+      const { result } = renderHook(() => useExperimentActions(1), { wrapper })
+
+      act(() => {
+        result.current.startAddingNewIteration()
+        result.current.cancelAddingNewIteration()
+      })
+
+      expect(result.current.experimentData.addingNewIteration).toBe(false)
+      expect(result.current.experimentData.newIterationTitle).toBe(null)
+    })
   })
 
-  it('starts adding new iteration', () => {
-    const { result } = renderHook(() => useExperimentActions(1), { wrapper })
+  describe('Module State', () => {
+    it('resets module to initial state', () => {
+      const { result } = renderHook(() => useExperimentActions(1), { wrapper })
 
-    act(() => {
-      result.current.startAddingNewIteration()
+      act(() => {
+        result.current.resetModule()
+      })
+
+      expect(result.current.experimentData.iterations).toHaveLength(0)
+      expect(result.current.experimentData.addingNewIteration).toBe(true)
     })
 
-    expect(result.current.experimentData.addingNewIteration).toBe(true)
-  })
+    it('toggles lock state', () => {
+      const { result } = renderHook(() => useExperimentActions(1), { wrapper })
 
-  it('cancels adding new iteration', () => {
-    const { result } = renderHook(() => useExperimentActions(1), { wrapper })
+      act(() => {
+        result.current.lockAndUnlockModule()
+      })
 
-    act(() => {
-      result.current.startAddingNewIteration()
-      result.current.cancelAddingNewIteration()
+      expect(result.current.experimentData.lock).toBe(true)
+
+      act(() => {
+        result.current.lockAndUnlockModule()
+      })
+
+      expect(result.current.experimentData.lock).toBe(false)
     })
-
-    expect(result.current.experimentData.addingNewIteration).toBe(false)
-    expect(result.current.experimentData.newIterationTitle).toBe(null)
-  })
-
-  it('resets module correctly', () => {
-    const { result } = renderHook(() => useExperimentActions(1), { wrapper })
-
-    act(() => {
-      result.current.resetModule()
-    })
-
-    expect(result.current.experimentData.iterations).toHaveLength(0)
-    expect(result.current.experimentData.addingNewIteration).toBe(true)
-  })
-
-  it('locks and unlocks module', () => {
-    const { result } = renderHook(() => useExperimentActions(1), { wrapper })
-
-    act(() => {
-      result.current.lockAndUnlockModule()
-    })
-
-    expect(result.current.experimentData.lock).toBe(true)
-
-    act(() => {
-      result.current.lockAndUnlockModule()
-    })
-
-    expect(result.current.experimentData.lock).toBe(false)
   })
 })

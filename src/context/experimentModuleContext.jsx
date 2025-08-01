@@ -7,7 +7,9 @@ export const ExperimentModuleProvider = ({ children, initialModules }) => {
   const [experimentModules, setExperimentModules] = useState(MOCK_DATA)
 
   return (
-    <ExperimentModuleContext.Provider value={{ experimentModules, setExperimentModules }}>
+    <ExperimentModuleContext.Provider
+      value={{ experimentModules, setExperimentModules }}
+    >
       {children}
     </ExperimentModuleContext.Provider>
   )
