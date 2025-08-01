@@ -6,7 +6,7 @@ import { cn } from '../../lib/utils'
 const IterationModuleType = ({ iterationType, iterationId, expId }) => {
   const { iterationData, addIterationType } = useIterationActions(expId, iterationId)
   return (
-    <Button className={cn('text-sm', iterationData?.type === iterationType.value && 'bg-primary text-green-500 border-green-500')} variant='outline' onClick={() => addIterationType(iterationType.value)}>
+    <Button className={cn('text-sm', iterationData?.type === iterationType.value && 'bg-primary text-selection border-selection hover:bg-selection/50 ')} variant='outline' onClick={() => addIterationType(iterationType.value)}>
       {iterationType.label}
     </Button>
   )

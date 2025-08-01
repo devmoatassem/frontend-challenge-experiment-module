@@ -47,6 +47,13 @@ export const MOCK_DATA = [
     lock: true,
     addingNewIteration: false,
     newIterationTitle: null,
-    iterations: []
+    iterations: [
+      {
+        id: 1,
+        title: 'Iteration 1',
+        type: 'short'
+      }
+    ]
+
   }
 ]

@@ -22,10 +22,31 @@ const ExperimentActions = ({ expId }) => {
   }
 
   if (experimentData.addingNewIteration) {
+    const iterations = experimentData?.iterations
+    const newTitle = experimentData?.newIterationTitle
+
+    const isCancelDisabled =
+      !Array.isArray(iterations) || iterations.length === 0
+
+    const isDoneDisabled =
+      newTitle === undefined ||
+      newTitle === null ||
+      (typeof newTitle === 'string' && newTitle.trim().length === 0)
+
     return (
       <div className='flex gap-2 items-center justify-end py-2'>
-        <Button onClick={cancelAddingNewIteration}>Cancel</Button>
-        <Button onClick={saveNewIteration}>Done</Button>
+        <Button
+          onClick={cancelAddingNewIteration}
+          disabled={isCancelDisabled}
+        >
+          Cancel
+        </Button>
+        <Button
+          disabled={isDoneDisabled}
+          onClick={saveNewIteration}
+        >
+          Done
+        </Button>
       </div>
     )
   }

@@ -40,7 +40,7 @@ const NewIteration = ({ expId }) => {
       {showPrompt
         ? (
           <div
-            className='min-h-24 overflow-hidden rounded bg-background text-lg px-5 py-4'
+            className='min-h-24 overflow-hidden rounded-md bg-background text-lg px-5 py-4 text-muted'
             onClick={() => {
               setShowPrompt(false)
               setTimeout(() => {
@@ -52,9 +52,8 @@ const NewIteration = ({ expId }) => {
           >
             To add a new iteration, start typing a prompt or{' '}
             <button
-              variant='ghost'
               tabIndex={-1}
-              className='cursor-pointer underline p-0 text-base hover:bg-background'
+              className='cursor-pointer underline p-0 text-base hover:bg-background text-muted'
               onClick={handleGenerate}
             >
               generate
@@ -67,7 +66,7 @@ const NewIteration = ({ expId }) => {
             type='text'
             onChange={handleInputChange}
             placeholder=''
-            className='w-full px-4 py-2 border-none rounded-md min-h-24 bg-background focus-visible:ring-0 focus-visible:ring-offset-0 '
+            className='w-full px-4 py-2 border-none rounded-md min-h-24 bg-background'
             style={{ zIndex: 1 }}
            />
           )}
