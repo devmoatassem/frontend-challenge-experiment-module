@@ -36,7 +36,7 @@ describe('IterationModule', () => {
   // test to check iterations clickable when locked
   it('check iterations clickable when locked', () => {
     renderWithContext(<ExperimentModule expId={3} />)
-    const accordionTrigger = screen.getByText('Experiment 3')
+    const accordionTrigger = screen.getByText('Experiment Module 3')
     fireEvent.click(accordionTrigger)
     const iteration = screen.getByText('EM-1')
     fireEvent.click(iteration)

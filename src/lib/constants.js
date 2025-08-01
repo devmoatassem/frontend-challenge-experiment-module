@@ -16,7 +16,7 @@ export const ITERATION_TYPES = [
 export const MOCK_DATA = [
   {
     id: 1,
-    title: 'Experiment 1',
+    title: 'Experiment Module 1',
     lock: false,
     addingNewIteration: false,
     newIterationTitle: null,
@@ -35,7 +35,7 @@ export const MOCK_DATA = [
   },
   {
     id: 2,
-    title: 'Experiment 2',
+    title: 'Experiment Module 2',
     lock: false,
     addingNewIteration: true,
     newIterationTitle: null,
@@ -43,7 +43,7 @@ export const MOCK_DATA = [
   },
   {
     id: 3,
-    title: 'Experiment 3',
+    title: 'Experiment Module 3',
     lock: true,
     addingNewIteration: false,
     newIterationTitle: null,

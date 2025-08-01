@@ -14,7 +14,7 @@ const renderWithContext = (component) => {
 describe('ExperimentModule', () => {
   it('renders experiment title correctly', () => {
     renderWithContext(<ExperimentModule expId={1} />)
-    expect(screen.getByText('Experiment 1')).toBeInTheDocument()
+    expect(screen.getByText('Experiment Module 1')).toBeInTheDocument()
   })
 
   it('displays unlock icon when experiment is unlocked', () => {
@@ -31,7 +31,7 @@ describe('ExperimentModule', () => {
     renderWithContext(<ExperimentModule expId={1} />)
 
     // First, expand the accordion to see the iterations
-    const accordionTrigger = screen.getByText('Experiment 1')
+    const accordionTrigger = screen.getByText('Experiment Module 1')
     // Import fireEvent at the top if not already imported
 
     fireEvent.click(accordionTrigger)
@@ -45,7 +45,7 @@ describe('ExperimentModule', () => {
     renderWithContext(<ExperimentModule expId={2} />)
 
     // First, expand the accordion to see the iterations
-    const accordionTrigger = screen.getByText('Experiment 2')
+    const accordionTrigger = screen.getByText('Experiment Module 2')
     fireEvent.click(accordionTrigger)
 
     expect(screen.getByText('Adding iteration...')).toBeInTheDocument()
@@ -55,7 +55,7 @@ describe('ExperimentModule', () => {
     renderWithContext(<ExperimentModule expId={2} />)
 
     // First, expand the accordion to see the iterations
-    const accordionTrigger = screen.getByText('Experiment 2')
+    const accordionTrigger = screen.getByText('Experiment Module 2')
     fireEvent.click(accordionTrigger)
     const generateTrigger = screen.getByText('generate')
     fireEvent.click(generateTrigger)
