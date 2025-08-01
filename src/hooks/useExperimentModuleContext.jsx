@@ -13,7 +13,7 @@ const useExperimentModuleContext = () => {
   const addNewExperimentModule = () => {
     setExperimentModules((prevModules) => [...prevModules, {
       id: prevModules.length + 1,
-      title: 'New Experiment',
+      title: `Experiment Module ${prevModules.length + 1}`,
       iterations: [],
       lock: false,
       addingNewIteration: true,

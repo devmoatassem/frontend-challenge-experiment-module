@@ -100,7 +100,7 @@ const useExperimentActions = (expId) => {
       })
     )
   }
-
+  const isNew = experimentModules.length === expId && experimentData?.iterations?.length === 0
   return {
     experimentData,
     saveNewIteration,
@@ -108,7 +108,8 @@ const useExperimentActions = (expId) => {
     startAddingNewIteration,
     cancelAddingNewIteration,
     resetModule,
-    lockAndUnlockModule
+    lockAndUnlockModule,
+    isNew
   }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion'
 import useExperimentActions from '../../hooks/useExperimentActions'
 import { FaLock, FaLockOpen } from 'react-icons/fa6'
@@ -8,10 +8,20 @@ import ExperimentActions from './experimentActions'
 import { cn } from '../../lib/utils'
 
 const ExperimentModule = ({ expId }) => {
-  const { experimentData } = useExperimentActions(expId)
-
+  const { experimentData, isNew } = useExperimentActions(expId)
+  const [openValue, setOpenValue] = useState(() => {
+    if (
+      isNew
+    ) {
+      return `experiment-${expId}`
+    }
+    return ''
+  })
   return (
-    <Accordion collapsible className='bg-primary px-5 rounded-lg overflow-hidden'>
+    <Accordion
+      type='single' collapsible value={openValue}
+      onValueChange={setOpenValue} className='bg-primary px-5 rounded-lg overflow-hidden'
+    >
       <AccordionItem value={`experiment-${expId}`}>
         <AccordionTrigger
           className={cn(
