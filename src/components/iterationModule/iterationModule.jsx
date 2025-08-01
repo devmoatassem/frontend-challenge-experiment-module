@@ -8,7 +8,7 @@ import { Button } from '../ui/button'
 
 const IterationModule = ({ expId, iterationId, isNew = false }) => {
   const { iterationData, removeIteration } = useIterationActions(expId, iterationId)
-  const [openValue, setOpenValue] = useState(`iteration-${iterationId}-${expId}`)
+  const [openValue, setOpenValue] = useState('')
 
   return (
     <Accordion

@@ -14,7 +14,7 @@ const ExperimentModule = ({ expId }) => {
       <AccordionItem value={`experiment-${expId}`}>
         <AccordionTrigger className='text-2xl text-primary-foreground hover:text-primary-foreground/80'>{experimentData?.title}
           <div className='p-2 text-primary-foreground'>
-            {experimentData?.lock ? <FaLock /> : <FaLockOpen />}
+            {experimentData?.lock ? <FaLock data-testid='lock-icon' /> : <FaLockOpen data-testid='unlock-icon' />}
           </div>
         </AccordionTrigger>
         <AccordionContent className='p-0'>

@@ -44,7 +44,9 @@ const NewIteration = ({ expId }) => {
             onClick={() => {
               setShowPrompt(false)
               setTimeout(() => {
-                inputRef.current.focus()
+                if (inputRef.current) {
+                  inputRef.current.focus()
+                }
               })
             }}
           >

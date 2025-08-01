@@ -43,6 +43,9 @@ const useIterationActions = (expId, iterationId) => {
           const updatedIterations = module.iterations.filter(
             (iteration) => iteration?.id !== iterationId
           )
+          if (updatedIterations?.length === 0 || !updatedIterations) {
+            return { ...module, iterations: [], addingNewIteration: true, newIterationTitle: null }
+          }
           return { ...module, iterations: updatedIterations }
         }
         return module
@@ -50,7 +53,7 @@ const useIterationActions = (expId, iterationId) => {
       return newExperimentData
     })
   }
-  return { iterationData, addIterationType, removeIteration }
+  return { iterationData, experimentData, addIterationType, removeIteration }
 }
 
 export default useIterationActions
