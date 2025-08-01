@@ -36,7 +36,21 @@ const useIterationActions = (expId, iterationId) => {
     })
   }
 
-  return { iterationData, addIterationType }
+  const removeIteration = () => {
+    setExperimentModules(prev => {
+      const newExperimentData = prev.map((module) => {
+        if (module.id === expId) {
+          const updatedIterations = module.iterations.filter(
+            (iteration) => iteration?.id !== iterationId
+          )
+          return { ...module, iterations: updatedIterations }
+        }
+        return module
+      })
+      return newExperimentData
+    })
+  }
+  return { iterationData, addIterationType, removeIteration }
 }
 
 export default useIterationActions

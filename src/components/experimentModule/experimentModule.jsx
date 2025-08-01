@@ -2,7 +2,7 @@ import React from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion'
 import useExperimentActions from '../../hooks/useExperimentActions'
 import { FaLock, FaLockOpen } from 'react-icons/fa6'
-import IterationModule from '../iterationModule'
+import IterationModule from '../iterationModule/iterationModule'
 import NewIteration from './newIteration'
 import ExperimentActions from './experimentActions'
 
