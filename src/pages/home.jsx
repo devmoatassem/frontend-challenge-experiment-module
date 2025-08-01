@@ -8,7 +8,7 @@ const Home = () => {
   const { experimentModules, addNewExperimentModule } = useExperimentModuleContext()
   return (
     <div className='bg-background'>
-      <div className='max-w-xl mx-auto h-screen overflow-auto space-y-2.5 p-4'>
+      <div className='max-w-lg mx-auto h-screen overflow-auto space-y-2.5 p-4'>
         {experimentModules.map((experiment) => (
           <ExperimentModule key={experiment.id} expId={experiment.id} />
         ))}
