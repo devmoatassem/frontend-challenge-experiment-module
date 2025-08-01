@@ -8,13 +8,16 @@ const IterationModuleType = ({ iterationType, iterationId, expId }) => {
   return (
     <Button
       className={cn(
-        'text-sm',
-        iterationData?.type === iterationType.value && 'bg-primary text-selection border-selection hover:bg-selection/50 '
+        'text-sm max-w-full min-w-0 flex-shrink truncate',
+        iterationData?.type === iterationType.value && 'bg-primary text-selection border-selection hover:bg-selection/50'
       )}
       variant='outline'
       onClick={() => addIterationType(iterationType.value)}
+      title={iterationType.label}
     >
-      {iterationType.label}
+      <span className='truncate'>
+        {iterationType.label}
+      </span>
     </Button>
   )
 }
