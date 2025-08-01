@@ -7,9 +7,9 @@ import { FaPlus } from 'react-icons/fa6'
 const Home = () => {
   const { experimentModules, addNewExperimentModule } = useExperimentModuleContext()
   return (
-    <div className='bg-background font-sans tracking-wide'>
+    <div className='bg-background font-sans tracking-wide h-screen overflow-auto'>
       <div
-        className='max-w-lg mx-auto h-screen overflow-auto space-y-2.5 p-4'
+        className='max-w-lg mx-auto  space-y-2.5 p-4'
       >
         {experimentModules.map((experiment) => (
           <ExperimentModule
