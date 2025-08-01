@@ -24,7 +24,7 @@ const IterationModule = ({ expId, iterationId, isNew = false }) => {
         <AccordionTrigger
           className='justify-start text-base font-normal leading-2 grid grid-cols-6 items-center'
         >
-          <p className='text-muted'>{`EM-${iterationId}`}</p>
+          <p className='text-muted min-w-10'>{`EM-${iterationId}`}</p>
           <div className='col-span-6 col-start-2 flex items-center justify-between'>
             <p className='text-muted'>
               {!isNew
