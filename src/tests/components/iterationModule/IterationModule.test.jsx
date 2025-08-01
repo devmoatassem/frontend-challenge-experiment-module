@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import IterationModule from '../../../components/iterationModule/iterationModule'
 import { ExperimentModuleProvider } from '../../../context/experimentModuleContext'
 import { ITERATION_TYPES } from '../../../lib/constants'
+import ExperimentModule from '../../../components/experimentModule/experimentModule'
 
 const renderWithContext = (component) => {
   return render(
@@ -32,7 +33,17 @@ describe('IterationModule', () => {
       expect(screen.getByRole('button', { name: type.label })).toBeInTheDocument()
     })
   })
-
+  // test to check iterations clickable when locked
+  it('check iterations clickable when locked', () => {
+    renderWithContext(<ExperimentModule expId={3} />)
+    const accordionTrigger = screen.getByText('Experiment 3')
+    fireEvent.click(accordionTrigger)
+    const iteration = screen.getByText('EM-1')
+    fireEvent.click(iteration)
+    ITERATION_TYPES.forEach(type => {
+      expect(screen.queryByText(type.label)).not.toBeInTheDocument()
+    })
+  })
   it('handles remove iteration', () => {
     renderWithContext(<IterationModule expId={1} iterationId={1} />)
     fireEvent.click(screen.getByText('EM-1'))
